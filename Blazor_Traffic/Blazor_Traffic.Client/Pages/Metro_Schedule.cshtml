@@ -2,25 +2,29 @@
 @page "/metro_schedule"
 @inject HttpClient Http
 
-@if (stations == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <select class="form-control" onchange="@OnSelectionChanged">
-        <option> --- Избери станция --- </option>
-        @foreach (var station in stations)
-        {
-            <option value="@station.Id">@station.Name</option>
-        }
-    </select>
-}
+<div class="container">
+    <div class="row">
+    @if (stations == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <select class="form-control" onchange="@OnSelectionChanged">
+            <option> --- Избери станция --- </option>
+            @foreach (var station in stations)
+            {
+                <option value="@station.Id">@station.Name</option>
+            }
+        </select>
+    }
+    </div>
+</div>
 
-@if (times != null)
-{
-    <Times times="@times" />
-}
+    @if (times != null)
+    {
+        <Times times="@times" />
+    }
 
 @functions {
     Station[] stations;
