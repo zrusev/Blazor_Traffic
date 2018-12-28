@@ -1,0 +1,40 @@
+﻿@using Blazor_Traffic.Shared
+@page "/metro_schedule"
+@inject HttpClient Http
+
+@if (stations == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <select class="form-control" onchange="@OnSelectionChanged">
+        <option> --- Избери станция --- </option>
+        @foreach (var station in stations)
+        {
+            <option value="@station.Id">@station.Name</option>
+        }
+    </select>
+}
+
+@if (times != null)
+{
+    <Times times="@times" />
+}
+
+@functions {
+    Station[] stations;
+
+    protected override async Task OnInitAsync()
+    {
+        stations = await Http.GetJsonAsync<Station[]>("api/Traffic/All");
+    }
+
+    StationTimes times;
+
+    private async Task OnSelectionChanged(UIChangeEventArgs e)
+    {
+        var selectedIndex = int.Parse(e.Value.ToString());
+        times = await Http.GetJsonAsync<StationTimes>($"api/Traffic/ById/{selectedIndex}");
+    }
+}

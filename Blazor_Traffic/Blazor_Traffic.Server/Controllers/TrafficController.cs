@@ -40,5 +40,11 @@
         {
             return await _trafficService.GetAllStations("/v1/metro/all");
         }
+
+        [HttpGet("[action]/{id}")]
+        public async Task<StationTimes> ById(int id)
+        {
+            return await _trafficService.GetStationById($"/v1/metro/times/{id}");
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿namespace Blazor_Traffic.Server.Services
 {
+    using Newtonsoft.Json;
     using Shared;
+    using System;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
@@ -25,6 +27,17 @@
             var result = await response.Content.ReadAsAsync<IEnumerable<Station>>();
 
             return result;
+        }
+
+        public async Task<StationTimes> GetStationById(string url)
+        {
+            var response = await this.Client.GetAsync(BaseEndpoint + url);
+
+            response.EnsureSuccessStatusCode();
+
+            var result = await response.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<StationTimes>(result);
         }
     }
 }

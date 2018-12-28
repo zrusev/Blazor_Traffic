@@ -1,0 +1,35 @@
+﻿@using Blazor_Traffic.Shared
+@inject HttpClient Http
+
+<hr />
+<h5>Посока: @times.Route_1_Direction</h5>
+<ul class="list-unstyled list-group">
+    @foreach (var time in times.Route_1_Times)
+    {
+    <li>
+        <span class="oi oi-chevron-right mr-2" aria-hidden="true"></span>
+        <span class="text-nowrap">
+            +@(time.Subtract(DateTime.UtcNow.AddHours(2)).Minutes == 0 ? 1 : time.Subtract(DateTime.UtcNow.AddHours(2)).Minutes) мин. <strong>@time.ToShortTimeString()</strong>
+        </span>
+    </li>
+}
+</ul>
+
+<hr />
+<h5>Посока: @times.Route_2_Direction</h5>
+<ul class="list-unstyled list-group">
+    @foreach (var time in times.Route_2_Times)
+    {
+    <li>
+        <span class="oi oi-chevron-right mr-2" aria-hidden="true"></span>
+        <span class="text-nowrap">
+            +@(time.Subtract(DateTime.UtcNow.AddHours(2)).Minutes == 0 ? 1 : time.Subtract(DateTime.UtcNow.AddHours(2)).Minutes) мин. <strong>@time.ToShortTimeString()</strong>
+        </span>
+    </li>
+    }
+</ul>
+
+@functions {
+[Parameter]
+private StationTimes times { get; set; }
+}
