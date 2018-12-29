@@ -5,21 +5,23 @@
     <div class="row">
         <div class="col-md">
             <table class="table">
-                <tbody>
-                    <tr>
-                        <td align="center" colspan="2">
+                <thead>
+                    <tr align="center">
+                        <th colspan="2">
                             Посока: @times.Route_1_Direction
-                        </td>
+                        </th>
                     </tr>
+                </thead>
+                <tbody>
                     @foreach (var time in times.Route_1_Times)
                     {
-                    <tr>
-                        <td class="col-md-6 col-sm-6" align="center">
+                    <tr class="d-flex">
+                        <td class="col-6 col-sm-6" align="left">
                             <span class="oi oi-clock mr-2" aria-hidden="true"></span>
                             +@(time.Subtract(DateTime.UtcNow.AddHours(2)).Minutes == 0 ? 1 : time.Subtract(DateTime.UtcNow.AddHours(2)).Minutes) мин.
                         </td>
-                        <td class="col-md-6 col-sm-6" align="center">
-                            <span class="oi oi-timer mr-2" aria-hidden="true"></span>
+                        <td class="col-6 col-sm-6" align="center">
+                            <span class="oi oi-timer" aria-hidden="true"></span>
                             @time.ToShortTimeString() ч.
                         </td>
                     </tr>
@@ -29,21 +31,23 @@
         </div>
         <div class="col-md">
             <table class="table">
-                <tbody>            
-                    <tr>
-                        <td align="center" colspan="2">
+                <thead>
+                    <tr align="center">
+                        <th colspan="2">
                             Посока: @times.Route_2_Direction
-                        </td>
+                        </th>
                     </tr>
+                </thead>    
+                <tbody>            
                     @foreach (var time in times.Route_2_Times)
                     {
-                    <tr>
-                        <td class="col-md-6 col-sm-6" align="center">
+                    <tr class="d-flex">
+                        <td class="col-6 col-sm-6" align="left">
                             <span class="oi oi-clock mr-2" aria-hidden="true"></span>
                             +@(time.Subtract(DateTime.UtcNow.AddHours(2)).Minutes == 0 ? 1 : time.Subtract(DateTime.UtcNow.AddHours(2)).Minutes) мин.
                         </td>
-                        <td class="col-md-6 col-sm-6" align="center">
-                            <span class="oi oi-timer mr-2" aria-hidden="true"></span>
+                        <td class="col-6 col-sm-6" align="center">
+                            <span class="oi oi-timer" aria-hidden="true"></span>
                             @time.ToShortTimeString() ч.
                         </td>
                     </tr>
