@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -12,5 +12,47 @@
     <app>Loading...</app>
 
     <script src="_framework/blazor.webassembly.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+
+    <script>
+        function searchByTerm() {
+            $.ajax({
+                method: "GET",
+                url: "api/Traffic/GetStopsList",
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data != null && data != undefined) {
+                        $('#stopName').typeahead({
+                            source: function (query, process) {
+                                stops = [];
+                                map = {};
+                                
+                                $.each(data, function (i, stop) {
+                                    let customName = `${stop.stopName} (${stop.stopCode})`;
+
+                                    map[customName] = stop;
+                                    stops.push(customName);
+                                });
+
+                                process(stops);
+                            },
+                            updater: function (item) {
+                                $('#selectedStop').val(map[item].stopCode);
+                                return item;
+                            },
+                            autoSelect: true,
+                            showHintOnFocus: true
+                        }).on('focus', function () {
+                            $('.dropdown-item').attr('href', '/onground_schedule');
+                        });
+                    }
+                }
+            })
+        }
+    </script>
+
 </body>
 </html>

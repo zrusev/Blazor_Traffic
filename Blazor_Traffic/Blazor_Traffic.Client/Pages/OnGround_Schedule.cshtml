@@ -1,0 +1,30 @@
+﻿@using Blazor_Traffic.Shared
+@page "/onground_schedule"
+@inject HttpClient Http
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-sm-6">
+            <input id="stopName" class="form-control typeahead" type="text" autocomplete="off" placeholder="Избери спирка" />
+            <input id="selectedStop" type="number" hidden bind="@Hidden" />
+        </div>
+        <div class="col-md-2 col-sm-6">
+            <button class="form-control btn btn-primary" onclick="@SearchForStop">График</button>
+        </div>
+    </div>
+</div>
+
+
+@functions {
+    public int Hidden { get; set; }
+
+    protected override async Task OnInitAsync()
+    {
+        await JSRuntime.Current.InvokeAsync<object>("searchByTerm");
+    }
+
+    void SearchForStop()
+    {
+        Console.WriteLine(Hidden);
+    }
+}
