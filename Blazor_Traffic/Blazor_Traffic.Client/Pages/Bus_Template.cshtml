@@ -1,0 +1,36 @@
+﻿@using Blazor_Traffic.Shared
+
+<div class="row">
+    <div class="col-md">
+        <table class="table">
+            <thead>
+                <tr align="center">
+                    <th colspan="4">
+                        Автобуси:
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bus in this.Buses)
+                {
+                    <tr class="d-flex">
+                        <td class="col-3 col-sm-3" align="left">
+                            <span class="oi oi-tablet" aria-hidden="true"></span> @bus.LineName
+                        </td>
+                        @foreach (var time in bus.Times)
+                        {
+                            <td class="col-3 col-sm-3" align="center">
+                                @time.ToShortTimeString()
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@functions {
+[Parameter]
+private StopTimes[] Buses { get; set; }
+}

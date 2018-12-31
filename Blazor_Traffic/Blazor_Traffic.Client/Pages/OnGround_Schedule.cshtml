@@ -5,26 +5,53 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-sm-6">
-            <input id="stopName" class="form-control typeahead" type="text" autocomplete="off" placeholder="Избери спирка" />
-            <input id="selectedStop" type="number" hidden bind="@Hidden" />
+            <input id="stopName" class="form-control typeahead" type="text" autocomplete="off" placeholder="Търсене на спирка" />
+            <input id="selectedStop" type="text" hidden />
         </div>
         <div class="col-md-2 col-sm-6">
-            <button class="form-control btn btn-primary" onclick="@SearchForStop">График</button>
+            <button class="form-control btn btn-primary" onclick="@SearchForStop">Покажи</button>
         </div>
     </div>
 </div>
 
+@if (transports != null)
+{
+    <div class="container">
+        <div class="row">
+            <Schedule_List Railways="@railways" Buses="@buses" Trolleys="@trolleys">@Stamp</Schedule_List>
+        </div>
+    </div>
+}
 
 @functions {
-    public int Hidden { get; set; }
+    private string Stamp => "Изчислени в: " + DateTime.Now.ToLongTimeString();
 
     protected override async Task OnInitAsync()
     {
         await JSRuntime.Current.InvokeAsync<object>("searchByTerm");
     }
 
-    void SearchForStop()
+    private async Task<string> GetSelectionValue()
     {
-        Console.WriteLine(Hidden);
+        return await JSRuntime.Current.InvokeAsync<string>("returnSelection");
+    }
+
+    StopTimes[] transports;
+
+    StopTimes[] railways;
+    StopTimes[] buses;
+    StopTimes[] trolleys;
+
+    private async Task SearchForStop()
+    {
+        var selection = await GetSelectionValue();
+
+        var obj = new StopCodeId { StopCode = selection };
+
+        transports = await Http.PostJsonAsync<StopTimes[]>("api/Traffic/StopTimes", obj);
+
+        railways = transports.Where(type => type.Type == 0).OrderBy(r => r.LineName).ToArray<StopTimes>();
+        buses = transports.Where(type => type.Type == 1).OrderBy(b => b.LineName).ToArray<StopTimes>();
+        trolleys = transports.Where(type => type.Type == 2).OrderBy(t => t.LineName).ToArray<StopTimes>();
     }
 }

@@ -1,0 +1,63 @@
+﻿@using Blazor_Traffic.Shared
+
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <table class="table">
+                <thead>
+                    <tr align="center">
+                        <th colspan="2">
+                            Посока: @Times.Route_1_Direction
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var time in Times.Route_1_Times)
+                    {
+                        <tr class="d-flex">
+                            <td class="col-6 col-sm-6" align="left">
+                                <span class="oi oi-clock mr-2" aria-hidden="true"></span>
+                                +@(time.Subtract(DateTime.UtcNow.AddHours(2)).Minutes == 0 ? 1 : time.Subtract(DateTime.UtcNow.AddHours(2)).Minutes) мин.
+                            </td>
+                            <td class="col-6 col-sm-6" align="center">
+                                <span class="oi oi-timer" aria-hidden="true"></span>
+                                @time.ToShortTimeString() ч.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md">
+            <table class="table">
+                <thead>
+                    <tr align="center">
+                        <th colspan="2">
+                            Посока: @Times.Route_2_Direction
+                        </th>
+                    </tr>
+                </thead>    
+                <tbody>            
+                    @foreach (var time in Times.Route_2_Times)
+                    {
+                        <tr class="d-flex">
+                            <td class="col-6 col-sm-6" align="left">
+                                <span class="oi oi-clock mr-2" aria-hidden="true"></span>
+                                +@(time.Subtract(DateTime.UtcNow.AddHours(2)).Minutes == 0 ? 1 : time.Subtract(DateTime.UtcNow.AddHours(2)).Minutes) мин.
+                            </td>
+                            <td class="col-6 col-sm-6" align="center">
+                                <span class="oi oi-timer" aria-hidden="true"></span>
+                                @time.ToShortTimeString() ч.
+                            </td>
+                        </tr>
+                    }            
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@functions {
+    [Parameter]
+    private StationTimes Times { get; set; }
+}

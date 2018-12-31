@@ -1,0 +1,40 @@
+﻿@using Blazor_Traffic.Shared
+
+<div class="container">
+    <div class="row">
+        <div class="col-md center">
+            <br />
+            <h4>Времена на пристигане на превозни средства</h4>
+            <span style="color:#b4b4b4">@ChildContent</span>
+        </div>
+    </div>
+
+    @if (Railways.Length > 0)
+    {
+        <Railway_Template Railways="@Railways" />
+    }
+
+    @if (Buses.Length > 0)
+    {
+        <Bus_Template Buses="@Buses" />
+    }
+
+    @if (Trolleys.Length > 0)
+    {
+        <Trolley_Template Trolleys="@Trolleys" />
+    }
+</div>
+
+@functions {
+    [Parameter]
+    private StopTimes[] Railways { get; set; }
+
+    [Parameter]
+    private StopTimes[] Buses { get; set; }
+
+    [Parameter]
+    private StopTimes[] Trolleys { get; set; }
+
+    [Parameter]
+    private RenderFragment ChildContent { get; set; }
+}

@@ -47,5 +47,11 @@
 
             return Json(items);
         }
+
+        [HttpPost("[action]")]
+        public async Task<IEnumerable<StopTimes>> StopTimes([FromBody]StopCodeId obj)
+        {
+            return await _trafficService.GetStationTiming("/v1/timing", obj);
+        }
     }
 }

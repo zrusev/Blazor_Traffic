@@ -1,10 +1,11 @@
 ﻿namespace Blazor_Traffic.Server.Services
 {
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
     using Shared;
-    using System;
     using System.Collections.Generic;
     using System.Net.Http;
+    using System.Text;
     using System.Threading.Tasks;
 
     public class TrafficService
@@ -39,6 +40,24 @@
 
             return JsonConvert.DeserializeObject<StationTimes>(result);
         }
+
+        public async Task<IEnumerable<StopTimes>> GetStationTiming(string url, StopCodeId stopObj)
+        {
+            var serializerSettings = new JsonSerializerSettings();
+
+            serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            string json = JsonConvert.SerializeObject(stopObj, serializerSettings);
+
+            StringContent queryString = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await this.Client.PostAsync(BaseEndpoint + url, queryString);
+
+            response.EnsureSuccessStatusCode();
+
+            var result = await response.Content.ReadAsAsync<IEnumerable<StopTimes>>();
+
+            return result;
+        }
     }
 }
-
