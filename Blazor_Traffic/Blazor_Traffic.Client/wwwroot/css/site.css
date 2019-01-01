@@ -120,4 +120,25 @@ app {
         /* Never collapse the sidebar for wide screens */
         display: block;
     }
+
+    .bus {
+        background-color: #c4161c;
+        color: white;
+        margin: 3px;
+        font-weight: bold;
+    }
+
+    .railway {
+        background-color: #f58220;
+        color: white;
+        margin: 3px;
+        font-weight: bold;
+    }
+
+    .trolley {
+        background-color: #0095da;
+        color: white;
+        margin: 3px;
+        font-weight: bold;
+    }
 }

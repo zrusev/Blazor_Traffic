@@ -13,17 +13,29 @@
             <tbody>
                 @foreach (var trolley in this.Trolleys)
                 {
-                    <tr class="d-flex">
-                        <td class="col-3 col-sm-3" align="left">
-                            <span class="oi oi-vertical-align-top" aria-hidden="true"></span> @trolley.LineName
+                <tr>
+                    <td class="col-md-3 col-xs-3" align="left">
+                        <span class="sm-label w-25 p-1 d-inline-flex trolley">
+                            <span class="oi oi-vertical-align-top p-1" aria-hidden="true"></span>
+                            <span>@trolley.LineName</span>
+                        </span>
+                    </td>
+                    @foreach (var time in trolley.Times)
+                    {
+                        <td class="col-md-3 col-xs-3 align-middle" align="center">
+                            @time.ToShortTimeString()
                         </td>
-                        @foreach (var time in trolley.Times)
+                    }
+                    @if (trolley.Times.Length < 3)
+                    {
+                        var loops = 3 - trolley.Times.Length;
+
+                        for (int i = 0; i < loops; i++)
                         {
-                            <td class="col-3 col-sm-3" align="center">
-                                @time.ToShortTimeString()
-                            </td>
+                            <td class="col-md-3 col-xs-3 align-middle" align="center"></td>
                         }
-                    </tr>
+                    }
+                </tr>
                 }
             </tbody>
         </table>
@@ -31,6 +43,6 @@
 </div>
 
 @functions {
-[Parameter]
-private StopTimes[] Trolleys { get; set; }
+    [Parameter]
+    private StopTimes[] Trolleys { get; set; }
 }

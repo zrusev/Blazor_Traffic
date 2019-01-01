@@ -13,17 +13,29 @@
             <tbody>
                 @foreach (var railway in this.Railways)
                 {
-                    <tr class="d-flex">
-                        <td class="col-3 col-sm-3" align="left">
-                            <span class="oi oi-vertical-align-bottom" aria-hidden="true"></span> @railway.LineName
+                <tr>
+                    <td class="col-md-3 col-xs-3" align="left">
+                        <span class="sm-label w-25 p-1 d-inline-flex railway">
+                            <span class="oi oi-vertical-align-bottom p-1" aria-hidden="true"></span>
+                            <span>@railway.LineName</span>
+                        </span>
+                    </td>
+                    @foreach (var time in railway.Times)
+                    {
+                        <td class="col-md-3 col-xs-3 align-middle" align="center">
+                            @time.ToShortTimeString()
                         </td>
-                        @foreach (var time in railway.Times)
+                    }
+                    @if (railway.Times.Length < 3)
+                    {
+                        var loops = 3 - railway.Times.Length;
+
+                        for (int i = 0; i < loops; i++)
                         {
-                            <td class="col-3 col-sm-3" align="center">
-                                @time.ToShortTimeString()
-                            </td>
+                            <td class="col-md-3 col-xs-3 align-middle" align="center"></td>
                         }
-                    </tr>
+                    }
+                </tr>
                 }
             </tbody>
         </table>
@@ -31,6 +43,6 @@
 </div>
 
 @functions {
-[Parameter]
-private StopTimes[] Railways { get; set; }
+    [Parameter]
+    private StopTimes[] Railways { get; set; }
 }
