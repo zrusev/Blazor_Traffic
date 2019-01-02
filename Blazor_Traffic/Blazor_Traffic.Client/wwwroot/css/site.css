@@ -121,24 +121,29 @@ app {
         display: block;
     }
 
-    .bus {
-        background-color: #c4161c;
-        color: white;
-        margin: 3px;
-        font-weight: bold;
+    /* Custom class */
+    .w-md-35 {
+        width: 35% !important;
     }
+}
 
-    .railway {
-        background-color: #f58220;
-        color: white;
-        margin: 3px;
-        font-weight: bold;
-    }
+.bus {
+    background-color: #c4161c;
+    color: white;
+    margin: 3px;
+    font-weight: bold;
+}
 
-    .trolley {
-        background-color: #0095da;
-        color: white;
-        margin: 3px;
-        font-weight: bold;
-    }
+.railway {
+    background-color: #f58220;
+    color: white;
+    margin: 3px;
+    font-weight: bold;
+}
+
+.trolley {
+    background-color: #0095da;
+    color: white;
+    margin: 3px;
+    font-weight: bold;
 }

@@ -6,7 +6,7 @@
             <thead>
                 <tr align="center">
                     <th colspan="4">
-                        Тролеи:
+                        Тролейбуси:
                     </th>
                 </tr>
             </thead>
@@ -14,9 +14,9 @@
                 @foreach (var trolley in this.Trolleys)
                 {
                 <tr>
-                    <td class="col-md-3 col-xs-3" align="left">
-                        <span class="sm-label w-25 p-1 d-inline-flex trolley">
-                            <span class="oi oi-vertical-align-top p-1" aria-hidden="true"></span>
+                    <td class="col-md-3 col-xs-3" title="@trolley.TransportType" align="left">
+                        <span class="sm-label d-flex d-md-inline-block p-1 w-md-35 trolley">
+                            <span class="oi oi-vertical-align-top p-1 mr-1" aria-hidden="true"></span>
                             <span>@trolley.LineName</span>
                         </span>
                     </td>

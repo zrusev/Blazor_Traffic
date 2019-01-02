@@ -14,9 +14,9 @@
                 @foreach (var railway in this.Railways)
                 {
                 <tr>
-                    <td class="col-md-3 col-xs-3" align="left">
-                        <span class="sm-label w-25 p-1 d-inline-flex railway">
-                            <span class="oi oi-vertical-align-bottom p-1" aria-hidden="true"></span>
+                    <td class="col-md-3 col-xs-3" title="@railway.TransportType" align="left">
+                        <span class="sm-label d-flex d-md-inline-block p-1 w-md-35 railway">
+                            <span class="oi oi-vertical-align-bottom p-1 mr-1" aria-hidden="true"></span>
                             <span>@railway.LineName</span>
                         </span>
                     </td>

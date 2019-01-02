@@ -14,9 +14,9 @@
                 @foreach (var bus in this.Buses)
                 {
                 <tr>
-                    <td class="col-md-3 col-xs-3" align="left">
-                        <span class="sm-label w-25 p-1 d-inline-flex bus">
-                            <span class="oi oi-tablet p-1" aria-hidden="true"></span>
+                    <td class="col-md-3 col-xs-3" title="@bus.TransportType" align="left">
+                        <span class="sm-label d-flex d-md-inline-block p-1 w-md-35 bus">
+                            <span class="oi oi-tablet p-1 mr-1" aria-hidden="true"></span>
                             <span>@bus.LineName</span>
                         </span>
                     </td>

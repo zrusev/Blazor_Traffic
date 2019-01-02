@@ -1,4 +1,5 @@
 ﻿@using Blazor_Traffic.Shared
+@using Blazor_Traffic.Client.Helpers
 @page "/onground_schedule"
 @inject HttpClient Http
 
@@ -67,11 +68,23 @@
 
         transports = await Http.PostJsonAsync<StopTimes[]>("api/Traffic/StopTimes", obj);
 
-        railways = transports.Where(type => type.Type == 0).OrderBy(r => r.LineName).ToArray<StopTimes>();
-        buses = transports.Where(type => type.Type == 1).OrderBy(b => b.LineName).ToArray<StopTimes>();
-        trolleys = transports.Where(type => type.Type == 2).OrderBy(t => t.LineName).ToArray<StopTimes>();
+        railways = transports
+            .Where(type => type.Type == 0)
+            .OrderBy(r => r.LineName, new CustomComparer())
+            .ToArray<StopTimes>();
+
+        buses = transports
+            .Where(type => type.Type == 1)
+            .OrderBy(b => b.LineName, new CustomComparer())
+            .ToArray<StopTimes>();
+
+        trolleys = transports
+            .Where(type => type.Type == 2)
+            .OrderBy(t => t.LineName, new CustomComparer())
+            .ToArray<StopTimes>();
 
         Switch = false;
+
         Stamp = DateTime.Now.AddHours(2).ToLongTimeString();
     }
 }
