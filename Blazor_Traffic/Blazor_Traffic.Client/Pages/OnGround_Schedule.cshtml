@@ -8,6 +8,8 @@
         <div class="col-md-10 col-sm-6">
             <input id="stopName" class="form-control typeahead" type="text" autocomplete="off" placeholder="Търсене на спирка" bind="@StopText" onclick="@(() => this.StopText = string.Empty)" />
             <input id="selectedStop" type="text" hidden />
+            <input id="coordinatesX" type="text" hidden />
+            <input id="coordinatesY" type="text" hidden />
         </div>
         <div class="col-md-2 col-sm-6">
             <button class="form-control btn btn-primary" onclick="@SearchForStop">Покажи</button>
@@ -32,6 +34,13 @@
         </div>
     </div>
 }
+
+<div class="container">
+    <div class="row px-4">
+        <div id="map"></div>        
+    </div>
+    <br />
+</div>
 
 @functions {
     StopTimes[] transports;
@@ -86,5 +95,7 @@
         Switch = false;
 
         Stamp = DateTime.Now.AddHours(2).ToLongTimeString();
+
+        await JSRuntime.Current.InvokeAsync<object>("initMap");
     }
 }

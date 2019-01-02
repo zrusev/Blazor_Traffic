@@ -29,7 +29,7 @@
                             source: function (query, process) {
                                 stops = [];
                                 map = {};
-                                
+
                                 $.each(data, function (i, stop) {
                                     let customName = `${stop.stopName} (${stop.stopCode})`;
 
@@ -41,6 +41,8 @@
                             },
                             updater: function (item) {
                                 $('#selectedStop').val(map[item].stopCode);
+                                $('#coordinatesX').val(map[item].coordinates[0]);
+                                $('#coordinatesY').val(map[item].coordinates[1]);
                                 return item;
                             },
                             autoSelect: true,
@@ -60,5 +62,19 @@
         }
     </script>
 
+    <script>
+        function initMap() {
+            var objLocation = {
+                lat: parseFloat($('#coordinatesX').val()),
+                lng: parseFloat($('#coordinatesY').val())
+            };
+            
+            var map = new google.maps.Map(document.getElementById('map'), { zoom: 17, center: objLocation });
+            
+            var marker = new google.maps.Marker({ position: objLocation, map: map });
+        }
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&region=BG&language=bg&callback=initMap"></script>
 </body>
 </html>
