@@ -5,21 +5,21 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-sm-6">
+        <div class="col-12 col-md-10">
             <input id="stopName" class="form-control typeahead" type="text" autocomplete="off" placeholder="Търсене на спирка" bind="@StopText" onclick="@(() => this.StopText = string.Empty)" />
             <input id="selectedStop" type="text" hidden />
             <input id="coordinatesX" type="text" hidden />
             <input id="coordinatesY" type="text" hidden />
         </div>
-        <div class="col-md-2 col-sm-6">
+        <div class="col-12 col-md-2">
             <button class="form-control btn btn-primary" onclick="@SearchForStop">Покажи</button>
         </div>
     </div>
     @if (Switch)
     {
         <div class="row">
-            <div class="col-md-12 col-sm-12">
-            <p><em>Зареждане на времена на пристигане...</em></p>
+            <div class="col-12 col-md-12">
+                <p><em>Зареждане на времена на пристигане...</em></p>
             </div>
         </div>
     }
@@ -36,7 +36,7 @@
 }
 
 <div class="container">
-    <div class="row px-4">
+    <div class="row">
         <div id="map"></div>        
     </div>
     <br />

@@ -88,6 +88,10 @@ app {
     .main .top-row {
         display: none;
     }
+
+    .table-responsive {
+        font-size: 0.6875rem;
+    }
 }
 
 @media (min-width: 768px) {
